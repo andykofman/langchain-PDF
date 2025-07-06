@@ -8,6 +8,25 @@ An AI application that allows you to upload PDF documents and ask questions abou
 
 ---
 
+## 🛡️ Monitoring & Educational Logging
+
+This project includes a `monitor.py` module that provides comprehensive, educational logging of all major pipeline steps:
+- PDF upload
+- Text extraction
+- Text chunking
+- Embedding creation
+- Vector store creation
+- Chain creation
+- User question received
+- Query embedding
+- Semantic search
+- Knowledge base search
+- Ranked results
+- LLM response
+- Error handling
+
+All logs will be written to `monitor.log` with clear explanations, making it easy for new learners to understand what happens under the hood in a modern LLM-powered RAG system.
+
 ## 🌟 Features
 
 - **PDF Document Processing**: Upload and extract text from PDF files
