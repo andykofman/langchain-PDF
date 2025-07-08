@@ -8,6 +8,8 @@ An AI application that allows you to upload PDF documents and ask questions abou
 
 ---
 
+## Live Deployment
+[Streamlit Live](https://langchain-pdf-reader.streamlit.app/)
 ## 🛡️ Monitoring & Educational Logging
 
 This project includes a `monitor.py` module that provides comprehensive, educational logging of all major pipeline steps:
