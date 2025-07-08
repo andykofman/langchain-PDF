@@ -19,7 +19,7 @@ This directory contains the optimized version of the PDF Q&A Assistant for Strea
    - Copy the key
 
 3. **Deploy to Streamlit Cloud:**
-   - Go to [share.streamlit.io](https://share.streamlit.io)
+   - Go to [share.streamlit.io](https://share.https://langchain-pdf-reader.streamlit.app/.io)
    - Sign in with GitHub
    - Click "New app"
    - Set repository to your forked repo
