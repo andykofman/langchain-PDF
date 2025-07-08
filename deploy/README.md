@@ -69,7 +69,15 @@ deploy/
 To run locally:
 ```bash
 cd deploy
-pip install -r requirements.txt
+
+# Install dependencies
+python install.py
+# OR manually: pip install -r requirements.txt
+
+# Test deployment
+python deploy.py
+
+# Run the app
 streamlit run streamlit_app.py
 ```
 

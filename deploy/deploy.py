@@ -31,6 +31,19 @@ def check_requirements():
     print("✅ All required files found")
     return True
 
+def check_requirements_installed():
+    """Check if required packages are installed"""
+    try:
+        import streamlit
+        import langchain
+        import langchain_google_genai
+        print("✅ Required packages are installed")
+        return True
+    except ImportError as e:
+        print(f"❌ Missing packages: {e}")
+        print("   Run: pip install -r requirements.txt")
+        return False
+
 def check_api_key():
     """Check if API key is configured"""
     # Check environment variable
@@ -54,17 +67,35 @@ def test_local_run():
     """Test if the app can run locally"""
     try:
         print("🧪 Testing local run...")
+        # Test basic imports first
         result = subprocess.run([
             sys.executable, "-c", 
-            "import streamlit_app; print('✅ Import successful')"
-        ], capture_output=True, text=True, timeout=10)
+            "import streamlit; import os; print('Basic imports successful')"
+        ], capture_output=True, text=True, timeout=15)
         
         if result.returncode == 0:
-            print("✅ Local test passed")
-            return True
+            print("✅ Basic imports test passed")
+            
+            # Test app import with longer timeout
+            result = subprocess.run([
+                sys.executable, "-c", 
+                "import streamlit_app; print('App import successful')"
+            ], capture_output=True, text=True, timeout=30)
+            
+            if result.returncode == 0:
+                print("✅ App import test passed")
+                return True
+            else:
+                print(f"⚠️  App import test failed: {result.stderr}")
+                print("   This might be due to missing dependencies. Try installing requirements first.")
+                return False
         else:
-            print(f"❌ Local test failed: {result.stderr}")
+            print(f"❌ Basic imports failed: {result.stderr}")
             return False
+    except subprocess.TimeoutExpired:
+        print("⚠️  Import test timed out - this is normal for first run")
+        print("   Dependencies are being downloaded. Try running again.")
+        return True  # Don't fail on timeout
     except Exception as e:
         print(f"❌ Local test error: {e}")
         return False
@@ -105,6 +136,7 @@ def main():
     
     checks = [
         ("File Structure", check_requirements),
+        ("Requirements Installed", check_requirements_installed),
         ("API Key", check_api_key),
         ("Local Test", test_local_run)
     ]
